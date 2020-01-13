@@ -1,0 +1,11 @@
+body {
+	font-family: sans-serif;
+}
+* {
+	box-sizing: border-box;
+}
+
+.companies-hor-item img{
+	width: 200px;
+	height: 200px;
+}

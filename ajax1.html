@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ajax 1 - Text File</title>
+</head>
+<body>
+
+	<button id="button">Get Text File</button>
+	<br>
+	<div id="text"></div>
+	<br>
+	<script>
+		// Greate event listener
+		document.getElementById('button').addEventListener('click', loadText)
+
+		function loadText() {
+			// Create XHR Object
+			let xhr = new XMLHttpRequest()
+			/// OPEN - type, url/file, async
+			xhr.open('GET', 'sample.txt', true)
+
+			console.log('READYSTAT: ', xhr.readyState)
+
+			// OPTIONAL - used for loaders
+			xhr.onprogress = function() {
+			console.log('READYSTATE: ', xhr.readyState)
+			}
+
+			xhr.onload = function() {
+				console.log('READYSTAT: ', xhr.readyState)
+				if(this.status == 200){
+					// console.log(this.responseText)
+					document.getElementById('text').innerHTML = this.responseText
+				} else if(this.status = 404){
+					document.getElementById('text').innerHTML = "Not found"
+				}
+			}
+
+			xhr.onerror = function() {
+				console.log('Rquest Error...')
+			}
+
+			// xhr.onreadystatechange = function(){
+			// 		console.log('READYSTAT: ', xhr.readyState)
+			// 	if(this.readyState == 4 && this.status == 200) {
+			// 		console.log(this.responseText)
+			// 	}
+			// }
+
+			// Sends request
+			xhr.send()
+		}
+
+		// readyState Values
+		// 0: request not initialized - запрос не инициализирован
+		// 1: server connection established - соединение с сервером установлено
+		// 2: request reveived - запрос получен
+		// 3: processing request - обработка запроса
+		// 4: request finished and respnse is ready - запрос завершен и respnse готов
+
+		// HTTP Statuses
+		// 200: "Ok"
+		// 403: "Forbidden" Запрещенный
+		// 404: "Not Found"
+
+	</script>
+</body>
+</html>
